@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Score Dashboard - Track Your Website Performance</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SEO Score Dashboard</h1>
+            <p>Track and improve your website's SEO performance</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="overall-score">
+                <h2>Overall SEO Score</h2>
+                <div class="score-display" id="overallScore">0</div>
+                <div class="score-label">out of 100 points</div>
+            </div>
+            
+            <div>
+                <label for="checkDate" style="font-size: 15px; font-weight: 600; margin-bottom: 8px; display: block;">Date of measurement:</label>
+                <input type="date" id="checkDate" class="date-input">
+            </div>
+            
+            <!-- Technical SEO -->
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-title">1. Technical SEO</div>
+                    <div class="category-score" id="techScore">0/20</div>
+                </div>
+                <div class="category-description">Speed, mobile-friendliness, security</div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">Google PageSpeed Insights</span>
+                        <a href="https://pagespeed.web.dev/" target="_blank" class="tool-link">Open tool →</a>
+                    </div>
+                    
+                    <div class="score-input-group">
+                        <label>Mobile Performance Score:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="pagespeed_mobile" data-category="tech" data-weight="2.5" placeholder="0-100">
+                            <span class="unit">/ 100</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_pagespeed_mobile" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="score-input-group">
+                        <label>Desktop Performance Score:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="pagespeed_desktop" data-category="tech" data-weight="2.5" placeholder="0-100">
+                            <span class="unit">/ 100</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_pagespeed_desktop" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">Run test, enter both scores (5 points total)</div>
+                    </div>
+                </div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">GTmetrix</span>
+                        <a href="https://gtmetrix.com/" target="_blank" class="tool-link">Open tool →</a>
+                    </div>
+                    <div class="score-input-group">
+                        <label>Performance Score:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="gtmetrix" data-category="tech" data-weight="5" placeholder="0-100">
+                            <span class="unit">/ 100</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_gtmetrix" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">GTmetrix Grade (5 points)</div>
+                    </div>
+                </div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">Mobile-Friendly Test</span>
+                        <a href="https://search.google.com/test/mobile-friendly" target="_blank" class="tool-link">Open tool →</a>
+                    </div>
+                    <div class="score-input-group">
+                        <label>Mobile-Friendly:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="mobile" data-category="tech" data-weight="5" placeholder="100 if passed, 0 if not">
+                            <span class="unit">/ 100</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_mobile" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">100 if passed, 0 if not (5 points)</div>
+                    </div>
+                </div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">SSL Labs</span>
+                        <a href="https://www.ssllabs.com/ssltest/" target="_blank" class="tool-link">Open tool →</a>
+                    </div>
+                    <div class="score-input-group">
+                        <label>SSL Rating:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="ssl" data-category="tech" data-weight="5" placeholder="A+=100, A=90, B=75">
+                            <span class="unit">/ 100</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_ssl" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">A+=100, A=90, B=75, C=50 (5 points)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- On-Page SEO -->
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-title">2. On-Page SEO & Content</div>
+                    <div class="category-score" id="contentScore">0/25</div>
+                </div>
+                <div class="category-description">Content quality, keywords, meta tags</div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">Screaming Frog</span>
+                        <a href="https://www.screamingfrog.co.uk/seo-spider/" target="_blank" class="tool-link">Download →</a>
+                    </div>
+                    <div class="score-input-group">
+                        <label>Meta Titles OK:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="metatitles" data-category="content" data-weight="5" placeholder="% pages">
+                            <span class="unit">%</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_metatitles" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">% pages with correct meta titles (5 points)</div>
+                    </div>
+                </div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">Screaming Frog</span>
+                        <a href="https://www.screamingfrog.co.uk/seo-spider/" target="_blank" class="tool-link">Download →</a>
+                    </div>
+                    <div class="score-input-group">
+                        <label>Meta Descriptions OK:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="metadesc" data-category="content" data-weight="5" placeholder="% pages">
+                            <span class="unit">%</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_metadesc" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">% pages with descriptions (5 points)</div>
+                    </div>
+                </div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">Yoast SEO / Rank Math</span>
+                    </div>
+                    <div class="score-input-group">
+                        <label>Content Quality:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="contentquality" data-category="content" data-weight="10" placeholder="Average score">
+                            <span class="unit">/ 100</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_contentquality" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">Average Yoast/Rank Math score (10 points)</div>
+                    </div>
+                </div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">Screaming Frog</span>
+                        <a href="https://www.screamingfrog.co.uk/seo-spider/" target="_blank" class="tool-link">Download →</a>
+                    </div>
+                    <div class="score-input-group">
+                        <label>H1 Tags OK:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="h1tags" data-category="content" data-weight="5" placeholder="% pages">
+                            <span class="unit">%</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_h1tags" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">% pages with unique H1 tags (5 points)</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Backlinks -->
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-title">3. Backlinks</div>
+                    <div class="category-score" id="backlinkScore">0/20</div>
+                </div>
+                <div class="category-description">Links from other websites</div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">Ahrefs Backlink Checker</span>
+                        <a href="https://ahrefs.com/backlink-checker" target="_blank" class="tool-link">Open tool →</a>
+                    </div>
+                    <div class="score-input-group">
+                        <label>Domain Rating (DR):</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="ahrefs" data-category="backlink" data-weight="10" placeholder="0-100">
+                            <span class="unit">/ 100</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_ahrefs" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">Ahrefs Domain Rating (10 points)</div>
+                    </div>
+                </div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">Moz Link Explorer</span>
+                        <a href="https://moz.com/link-explorer" target="_blank" class="tool-link">Open tool →</a>
+                    </div>
+                    <div class="score-input-group">
+                        <label>Domain Authority (DA):</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="moz" data-category="backlink" data-weight="10" placeholder="0-100">
+                            <span class="unit">/ 100</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_moz" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">Moz Domain Authority (10 points)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- User Experience -->
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-title">4. User Experience</div>
+                    <div class="category-score" id="uxScore">0/15</div>
+                </div>
+                <div class="category-description">How easy to use your website</div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">Google Search Console</span>
+                        <a href="https://search.google.com/search-console" target="_blank" class="tool-link">Open tool →</a>
+                    </div>
+                    <div class="score-input-group">
+                        <label>Core Web Vitals - Good URLs:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="corevitals" data-category="ux" data-weight="10" placeholder="% good URLs">
+                            <span class="unit">%</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_corevitals" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">% URLs passing Core Web Vitals (10 points)</div>
+                    </div>
+                </div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">Manual Assessment</span>
+                    </div>
+                    <div class="score-input-group">
+                        <label>Navigation & Design:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="navigation" data-category="ux" data-weight="5" placeholder="Your rating">
+                            <span class="unit">/ 100</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_navigation" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">Menu, structure, readability (5 points)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Schema Markup -->
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-title">5. Schema Markup</div>
+                    <div class="category-score" id="schemaScore">0/10</div>
+                </div>
+                <div class="category-description">Structured data for search engines</div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">Google Rich Results Test</span>
+                        <a href="https://search.google.com/test/rich-results" target="_blank" class="tool-link">Open tool →</a>
+                    </div>
+                    <div class="score-input-group">
+                        <label>Valid Schema:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="richresults" data-category="schema" data-weight="10" placeholder="100 if valid, 0 if not">
+                            <span class="unit">/ 100</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_richresults" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">100 if valid schema exists (10 points)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Crawlability -->
+            <div class="category">
+                <div class="category-header">
+                    <div class="category-title">6. Crawlability & Indexing</div>
+                    <div class="category-score" id="crawlScore">0/10</div>
+                </div>
+                <div class="category-description">How easily search engines find your pages</div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">Google Search Console</span>
+                        <a href="https://search.google.com/search-console" target="_blank" class="tool-link">Open tool →</a>
+                    </div>
+                    <div class="score-input-group">
+                        <label>Coverage - Valid Pages:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="coverage" data-category="crawl" data-weight="5" placeholder="% valid">
+                            <span class="unit">%</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_coverage" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">% pages without errors (5 points)</div>
+                    </div>
+                </div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <span class="tool-name">XML Sitemap Check</span>
+                        <a href="https://www.xml-sitemaps.com/" target="_blank" class="tool-link">Open tool →</a>
+                    </div>
+                    <div class="score-input-group">
+                        <label>Sitemap Valid:</label>
+                        <div class="input-row">
+                            <input type="number" min="0" max="100" id="sitemap" data-category="crawl" data-weight="5" placeholder="100 if valid, 0 if not">
+                            <span class="unit">/ 100</span>
+                        </div>
+                        <div class="progress-visual">
+                            <div class="progress-fill" id="progress_sitemap" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-help">100 if sitemap exists and valid (5 points)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recommendations" id="recommendations" style="display: none;">
+                <h4>🎯 Recommendations for Improvement</h4>
+                <ul id="recommendationList"></ul>
+            </div>
+            
+            <button class="btn-primary" onclick="saveScore()">💾 Save This Measurement</button>
+            <button class="btn-secondary" onclick="exportData()">📊 Export Data (CSV)</button>
+            <button class="btn-secondary" onclick="resetForm()">🔄 Reset Form</button>
+            <button class="btn-danger" onclick="clearHistory()">🗑️ Clear History</button>
+            
+            <div class="history">
+                <h3>📈 History</h3>
+                <div id="historyList">
+                    <p style="text-align: center; color: #999; padding: 40px;">No history yet. Fill in measurements and click "Save".</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; padding: 40px 20px; margin-top: 60px; border-top: 2px solid #E8E3DB; background: #fafafa;">
+            <p style="font-size: 18px; color: #5C4A3C; margin: 0;">A free tool from <a href="https://www.akvarellskiss.se" target="_blank" style="color: #C9A882; text-decoration: none; font-weight: 700; font-size: 20px;">www.akvarellskiss.se</a></p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
